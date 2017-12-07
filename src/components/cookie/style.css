@@ -1,0 +1,14 @@
+.cookie {
+	cursor: pointer;
+	display: block;
+
+	background: none;
+	border: none;
+
+	margin: 0 auto;
+	width: 15rem;
+	height: 15rem;
+
+	font-size: 10rem;
+	outline: none;
+}

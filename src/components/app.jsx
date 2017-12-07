@@ -1,13 +1,22 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
 
+import { SubscribeToState } from './common/subscribe';
+import { appState } from '../services';
 import Header from './header';
+import Cookie from './cookie';
 
-export default class App extends Component {
+export default class App {
+	componentDidMount() {
+		appState.refresh();
+	}
+
 	render() {
 		return (
 			<div id="app">
-				<Header />
-				<div>test</div>
+				<SubscribeToState>
+					<Header />
+				</SubscribeToState>
+				<Cookie />
 			</div>
 		);
 	}
