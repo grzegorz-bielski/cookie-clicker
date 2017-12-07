@@ -1,15 +1,10 @@
-import ObservableService from './observerable-service';
-import StateService from './state-service';
-
-// initialState, could be loaded from IndexedDB
-const initialState = {
-	cookiesQuantity: 0,
-	cookiesPerClick: 1,
-	buildings: {
-		//
-	}
-};
+import ObservableService from './observable/observerable-service';
+import StateService from './state/state-service';
+import getState from './state/state-prepare';
 
 // initialize app state
 export const observable = new ObservableService();
-export const appState = new StateService({ observable, initialState });
+export const appState = new StateService({
+	observable,
+	state: getState()
+});

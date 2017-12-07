@@ -1,6 +1,6 @@
 import preact, { h, Component } from 'preact';
 import { observable } from '../../services';
-import { APP_STATE_CHANGED } from '../../services/events';
+import { APP_STATE_CHANGED } from '../../services/observable/observable-events';
 
 // Subscribe is a higher order component that will inject some data to it's children whenever a specific event occurs
 // Could be used to listen to any event, not necessarily to any that involves global app state

@@ -11,4 +11,14 @@
 
 	font-size: 10rem;
 	outline: none;
+
+	transition: transform 0.15s ease-in;
+}
+
+.cookie:hover {
+	transform: translate(-1px, -1px)
+}
+
+.cookie:active {
+	transform: translate(-4px, -4px)
 }

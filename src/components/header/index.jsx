@@ -14,6 +14,7 @@ export default class Header extends Component {
 		return (
 			<header class={style.header}>
 				<h1>Cookies: {sub && sub.cookiesQuantity}</h1>
+				<span>{sub && sub.name}</span>
 			</header>
 		);
 	}
