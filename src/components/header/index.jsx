@@ -1,21 +1,12 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
 import style from './style';
 
-export default class Header extends Component {
-	constructor(props) {
-		super(props);
-		console.log('Header loader: ', props);
-	}
-	componentWillReceiveProps(newProps) {
-		console.log('Header: ', newProps);
-	}
+const Header = ({ sub }) => (
+	<header class={style.header}>
+		<h1>Cookies: {sub && sub.cookiesDisplay}</h1>
+		<span>{sub && sub.name}</span>
+		<span>CpS: { sub && sub.cookiesPerSecond}</span>
+	</header>
+);
 
-	render({ sub }) {
-		return (
-			<header class={style.header}>
-				<h1>Cookies: {sub && sub.cookiesQuantity}</h1>
-				<span>{sub && sub.name}</span>
-			</header>
-		);
-	}
-}
+export default Header;

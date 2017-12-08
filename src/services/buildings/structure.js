@@ -5,6 +5,10 @@ export default class Structure {
 		this.name = name;
 		this.refreshRate = refreshRate ? refreshRate : 1;
 		this.incrQuantity = incrQuantity;
+
+		this.affordable = false;
+		this.cookiesPerSecond = 0;
+		this.price = this.getPrice(1);
 	}
 
 	getPrice(quantity = 1) {
@@ -14,18 +18,38 @@ export default class Structure {
 		const denominator = 0.15;
 
 		if (quantity === 1) {
-			return this.baseCost * (powBase ** this.owned);
+			return Math.ceil(this.baseCost * (powBase ** this.owned));
 		}
 		else if (quantity >= 1){
-			return (this.baseCost * (powBase ** (this.owned + quantity)) - (powBase ** this.owned)) / denominator;
+			return Math.ceil((this.baseCost * (powBase ** (this.owned + quantity)) - (powBase ** this.owned)) / denominator);
 		}
 		
 		throw new Error('quantity can\'t be lower than 1');
 	}
 
-	getCookiesPerSecond() {
-		return this.owned * this.refreshRate * this.incrQuantity;
+	calculateCookiesPerSecond() {
+		const cps = Math.floor(10 * (this.owned * this.refreshRate * this.incrQuantity)) / 10;
+		this.cookiesPerSecond = cps;
+		return cps;
 	}
 
-	/// TODO: rest of methods
+	checkIfAffordable(cookies, quantity = 1) {
+		const price = this.getPrice(quantity);
+		const affordable = cookies >= price;
+		this.affordable = affordable;
+		return affordable;
+	}
+
+	buy(cookies, quantity = 1) {
+		const price = this.getPrice(quantity);
+		if (cookies >= price) {
+			this.owned += quantity;
+		}
+
+		// calculate next price of structure
+		this.price = this.getPrice();
+
+		// return current price
+		return price;
+	}
 }

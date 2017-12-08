@@ -1,22 +1,13 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
 import style from './style';
 import { appState } from '../../services';
 
-export default class Cookie extends Component {
-	clickHander = () => appState.addCookies()
-	
-	constructor(props) {
-		super(props);
-		this.state = {
-			quantity: 0
-		};
-	}
+const clickHandler = () => appState.click();
 
-	render({ quantity }) {
-		return (
-			<button class={style.cookie} onClick={this.clickHander}>
-				🍪
-			</button>
-		);
-	}
-}
+const Cookie = ({ sub }) => (
+	<button class={style.cookie} onClick={clickHandler}>
+	🍪
+	</button>
+);
+
+export default Cookie;

@@ -1,0 +1,25 @@
+.store {
+	padding: 0;
+}
+
+.store li {
+	padding: 1rem;
+}
+
+.store .blocked {
+	opacity: 0.3;
+	pointer-events: none;
+	list-style-type: none;
+}
+
+
+.store .active {
+	cursor: pointer;
+	pointer-events: initial;
+	opacity: 1;
+	transition: background-color 0.3s ease-in;
+}
+
+.store .active{
+	background-color: #f7d126;
+}

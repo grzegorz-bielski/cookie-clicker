@@ -6,8 +6,9 @@ const loadAppState = () => (
 	{
 		name: 'Bakery',
 		cookiesQuantity: 0,
+		cookiesDisplay: 0,
 		cookiesPerClick: 1,
-		buildings: Buildings.map(building => ({ name: building.name, quantity: 1 }))
+		buildings: Buildings.map(building => ({ name: building.name, quantity: building.name === 'Cursor' ? 0 : 0 }))
 	}
 );
 
