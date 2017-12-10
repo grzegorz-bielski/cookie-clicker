@@ -4,7 +4,7 @@ import getState from './state/state-prepare';
 
 // initialize app state
 export const observable = new ObservableService();
-export const appState = new StateService({
+export const app = new StateService({
 	observable,
 	state: getState()
 });

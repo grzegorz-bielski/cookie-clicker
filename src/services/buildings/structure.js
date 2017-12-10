@@ -17,11 +17,8 @@ export default class Structure {
 		const powBase = 1.15;
 		const denominator = 0.15;
 
-		if (quantity === 1) {
-			return Math.ceil(this.baseCost * (powBase ** this.owned));
-		}
-		else if (quantity >= 1){
-			return Math.ceil((this.baseCost * (powBase ** (this.owned + quantity)) - (powBase ** this.owned)) / denominator);
+		if (quantity >= 1) {
+			return Math.ceil((this.baseCost * ((powBase ** (quantity + this.owned)) - (powBase ** this.owned))) / denominator);
 		}
 		
 		throw new Error('quantity can\'t be lower than 1');
@@ -35,21 +32,26 @@ export default class Structure {
 
 	checkIfAffordable(cookies, quantity = 1) {
 		const price = this.getPrice(quantity);
-		const affordable = cookies >= price;
-		this.affordable = affordable;
-		return affordable;
+		this.affordable = cookies >= price;
+
+		return [this.affordable, price];
 	}
 
 	buy(cookies, quantity = 1) {
-		const price = this.getPrice(quantity);
-		if (cookies >= price) {
+		const [affordable, price] = this.checkIfAffordable(cookies, quantity);
+
+		// buy structure
+		if (affordable) {
 			this.owned += quantity;
+
+			// calculate next price of structure
+			this.price = this.getPrice();
+
+			// return current price
+			return price;
 		}
 
-		// calculate next price of structure
-		this.price = this.getPrice();
-
-		// return current price
-		return price;
+		// structure can't be bought
+		return false;
 	}
 }
