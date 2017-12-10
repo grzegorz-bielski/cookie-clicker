@@ -19,6 +19,7 @@ $ npm run start
 * run tests with Jest and [preact-render-spy](https://github.com/mzgoddard/preact-render-spy) (Ezyme-like lib for Preact)
 ```
 $ npm run test
+$ npm run test:watch
 ```
 * serve with hot reload at localhost:8080
 ```
