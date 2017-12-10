@@ -17,7 +17,7 @@ export default class ObservableService {
 
 	removeObserver(eventType, observer) {
 		this.observers[eventType] = this.observers[eventType]
-			.filter(current => current.observer === observer);
+			.filter(current => current.observer !== observer);
 	}
 
 	emitEvent(eventType, data) {
