@@ -1,15 +1,16 @@
 import {
 	APP_STATE_CHANGED
-} from '../observable/observable-events';
+} from '../observable/events';
 
-// StateService encapsulates game logic and serves as data store for whole app
+// GameService encapsulates game logic and serves as data store for whole app
 // By using it's methods you are changing global state
 // which is then automatically injected into `sub` prop
 // to all components that are inside SubscribeToState HOC
-export default class StateService {
-	constructor({ observable, state }) {
+export default class GameService {
+	constructor({ observable, state, stateService }) {
 		this.observable = observable;
 		this.state = state;
+		this.stateService = stateService;
 
 		// init
 		this.calculateCookiesPerSecond();

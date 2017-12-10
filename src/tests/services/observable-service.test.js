@@ -1,4 +1,4 @@
-import ObservableService from '../../services/observable/observerable-service';
+import ObservableService from '../../services/observable/observable';
 
 describe('ObservableService', () => {
 	describe('constructor', () => {

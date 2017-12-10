@@ -1,8 +1,4 @@
 import Buildings from '../buildings/buildings';
-// import dbClient from '../db';
-
-// TODO
-
 // load app state from db or use default one
 const loadAppState = () => (
 	// if (!dbClient.get('app')) then return default state
@@ -28,4 +24,17 @@ const buildAppState = state => (
 	}) }
 );
 
-export default () => buildAppState(transformAppState(loadAppState()));
+// export default () => buildAppState(transformAppState(loadAppState()));
+
+class StateService {
+	constructor({ db, Buildings }) {
+		this.db = db;
+		this.Buildings = Buildings;
+	}
+
+	loadState() {
+		return Promise.resolve(buildAppState(transformAppState(loadAppState())));
+	}
+}
+
+export default StateService;

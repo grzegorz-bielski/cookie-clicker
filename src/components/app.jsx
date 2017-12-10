@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { SubscribeToState } from './common/subscribe';
+import { SubscribeToState } from './common/subscribe-to';
 // import { appState } from '../services';
 
 // components

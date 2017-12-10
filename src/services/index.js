@@ -1,10 +1,20 @@
-import ObservableService from './observable/observerable-service';
-import StateService from './state/state-service';
-import getState from './state/state-prepare';
+import ObservableService from './observable/observable';
+import Buildings from './buildings/buildings';
+import StateService from './game/state';
+import GameService from './game/game';
+import DbService from './database/db';
 
-// initialize app state
+// inject dependencies and initialize the app
+export let app;
 export const observable = new ObservableService();
-export const app = new StateService({
-	observable,
-	state: getState()
+
+const dbService = new DbService({
+	name: 'cookie-clicker-db',
+	stores: [{ store: 'saves', key: 'name' }]
+});
+
+const stateService = new StateService({ db: dbService, Buildings });
+
+stateService.loadState().then(state => {
+	app = new GameService({ observable, state, stateService });
 });

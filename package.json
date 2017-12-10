@@ -13,8 +13,13 @@
     "test:watch": "jest --watch"
   },
   "eslintConfig": {
-    "extends": ["eslint-config-synacor", "plugin:jest/recommended"],
-    "plugins": ["jest"],
+    "extends": [
+      "eslint-config-synacor",
+      "plugin:jest/recommended"
+    ],
+    "plugins": [
+      "jest"
+    ],
     "env": {
       "jest/globals": true
     }
@@ -34,6 +39,7 @@
     "preact-render-spy": "^1.2.1"
   },
   "dependencies": {
+    "idb": "^2.0.4",
     "preact": "^8.2.1",
     "preact-compat": "^3.17.0"
   },
