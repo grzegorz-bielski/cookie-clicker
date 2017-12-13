@@ -9,10 +9,20 @@
     "serve": "preact build && preact serve",
     "dev": "preact watch",
     "lint": "eslint src",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "eslintConfig": {
-    "extends": "eslint-config-synacor"
+    "extends": [
+      "eslint-config-synacor",
+      "plugin:jest/recommended"
+    ],
+    "plugins": [
+      "jest"
+    ],
+    "env": {
+      "jest/globals": true
+    }
   },
   "eslintIgnore": [
     "build/*"
@@ -21,6 +31,7 @@
     "babel-jest": "^21.2.0",
     "eslint": "^4.5.0",
     "eslint-config-synacor": "^1.1.0",
+    "eslint-plugin-jest": "^21.4.2",
     "identity-obj-proxy": "^3.0.0",
     "if-env": "^1.0.0",
     "jest": "^21.2.1",
@@ -28,6 +39,7 @@
     "preact-render-spy": "^1.2.1"
   },
   "dependencies": {
+    "idb": "^2.0.4",
     "preact": "^8.2.1",
     "preact-compat": "^3.17.0"
   },
