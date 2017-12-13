@@ -1,7 +1,7 @@
 
 // ObservableService is a class that implements observer pattern
 // it will run callbacks registered to specific events upon calling `emitEvent`.
-// Do not use it directly when dealing with global app state. Use `StateService`s methods instead.
+// Do not use it directly when dealing with global app state. Use `GameService`s methods instead.
 // It could be helpful with other actions though.
 export default class ObservableService {
 	constructor() {

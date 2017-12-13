@@ -1,8 +1,8 @@
 import { h } from 'preact';
 import { deep, render } from 'preact-render-spy';
 
-import { Subscribe } from '../../components/common/subscribe';
-import ObservableService from '../../services/observable/observerable-service';
+import Subscribe from '../../components/common/subscribe';
+import ObservableService from '../../services/observable/observable';
 
 describe('Subscribe', () => {
 	it('mounts it\'s children', () => {

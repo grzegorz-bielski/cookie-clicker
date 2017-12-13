@@ -1,5 +1,5 @@
 export default class Structure {
-	constructor({ baseCost, owned, name, refreshRate, incrQuantity }) {
+	constructor({ baseCost, owned = 0, name, refreshRate, incrQuantity }) {
 		this.baseCost = baseCost;
 		this.owned = owned;
 		this.name = name;

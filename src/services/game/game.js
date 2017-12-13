@@ -1,19 +1,35 @@
 import {
 	APP_STATE_CHANGED
-} from '../observable/observable-events';
+} from '../observable/events';
+import { getInitialState } from './util';
 
-// StateService encapsulates game logic and serves as data store for whole app
+// GameService encapsulates game logic and serves as data store for whole app
 // By using it's methods you are changing global state
 // which is then automatically injected into `sub` prop
 // to all components that are inside SubscribeToState HOC
-export default class StateService {
-	constructor({ observable, state }) {
+export default class GameService {
+	constructor({ observable, state, stateService, dbService, saveInterval }) {
+		// dependencies
 		this.observable = observable;
 		this.state = state;
+		this.dbService = dbService;
 
 		// init
 		this.calculateCookiesPerSecond();
 		this.startGame();
+		this.autoSave(saveInterval);
+	}
+
+	// save state to the Db on regular basis
+	autoSave(seconds) {
+		setInterval(() => this.dbService.write('state', this.state), seconds * 1000);
+	}
+
+	// resetGame removes all saved data from db store and restores initial values
+	resetGame() {
+		this.dbService.clear('state');
+		this.state = getInitialState();
+		this.calculateCookiesPerSecond();
 	}
 
 	// get cookies per second from every currently owned building and calculate global CpS.
@@ -46,7 +62,8 @@ export default class StateService {
 
 			requestAnimationFrame(frame);
 		};
-
+		
+		// start loop
 		requestAnimationFrame(frame);
 	}
 

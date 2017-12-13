@@ -1,11 +1,11 @@
-// Mock Browser API's which are not supported by JSDOM
+
+// requestAnimationFrame mock
 
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
 // requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
 // ... and changed by me.
 // MIT license
-
 Object.defineProperty(window, 'requestAnimationFrame', {
 	value: (function() {
 		let lastTime = 0;
@@ -21,7 +21,6 @@ Object.defineProperty(window, 'requestAnimationFrame', {
 	// writable allows Jest spies to ... well spy
 	writable: true
 });
-
 Object.defineProperty(window, 'cancelAnimationFrameMock', {
 	value(id) {
 		clearTimeout(id);
