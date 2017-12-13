@@ -1,8 +1,9 @@
-import idb from 'idb';
-
+// DbService takes care of DB operations on state
 export default class DbService {
-	constructor({ name, stores, version }) {
-		if ('indexedDB' in window) {
+	constructor({ driver, name, stores, version }) {
+		this.driver = driver;
+
+		if ('indexedDB' in window || process.env.NODE_ENV) {
 			this.dbPromise = this.createDatabase(name, stores, version = 1);
 		}
 		else {
@@ -12,7 +13,7 @@ export default class DbService {
 	}
 
 	createDatabase(name, stores, version = 1) {
-		return idb.open(name, version, db => {
+		return this.driver.open(name, version, db => {
 			stores.forEach(({ store, key }) => {
 				!db.objectStoreNames.contains(store) && db.createObjectStore(store, { keyPath: key });
 			});
@@ -28,7 +29,15 @@ export default class DbService {
 	}
 
 	readAll(store) {
-		return this.dbPromise.then(db => db.transaction(store, 'read').objectStore(store).getAll());
+		return this.dbPromise.then(db => db.transaction(store, 'readonly').objectStore(store).getAll());
+	}
+
+	clear(store) {
+		return this.dbPromise.then(db => {
+			const transaction = db.transaction(store, 'readwrite').objectStore(store).clear();
+
+			return transaction.complete;
+		});
 	}
 }
 

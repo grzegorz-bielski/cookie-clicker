@@ -7,6 +7,8 @@ describe('GameService', () => {
 
 	describe('constructor', () => {
 		it('should initialize the game', () => {
+			const autoSaveMock = jest.spyOn(GameService.prototype, 'autoSave')
+				.mockImplementation(() => true);
 			const startGameMock = jest.spyOn(GameService.prototype, 'startGame')
 				.mockImplementation(() => true);
 			const cpsMock = jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond')
@@ -18,12 +20,67 @@ describe('GameService', () => {
 			expect(app.state).toBe(true);
 			expect(cpsMock).toHaveBeenCalled();
 			expect(startGameMock).toHaveBeenCalled();
+			expect(autoSaveMock).toHaveBeenCalled();
+		});
+	});
+
+	describe('autoSave', () => {
+		it('should call dbService\'s write every x seconds', () => {
+			jest.spyOn(GameService.prototype, 'startGame').mockImplementation(() => true);
+			jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond').mockImplementation(() => true);
+			// const stateMock = jest.fn();
+			const dbServiceMock = {
+				write: jest.fn()
+			};
+
+			jest.useFakeTimers();
+
+			new GameService({
+				observable: true,
+				state: 'hi',
+				dbService: dbServiceMock,
+				saveInterval: 1
+			});
+
+			jest.runTimersToTime(1000);
+
+			expect(dbServiceMock.write).toHaveBeenCalledWith('state', 'hi');
+			expect(dbServiceMock.write).toHaveBeenCalledTimes(1);
+		});
+	});
+
+	describe('resetGame', () => {
+		it('should restore initial state', () => {
+			jest.spyOn(GameService.prototype, 'startGame').mockImplementation(() => true);
+			const stateMock = {
+				cookiesPerSecond: 1,
+				cookiesQuantity: 10.1,
+				buildings: [
+					{ checkIfAffordable: jest.fn(() => true), calculateCookiesPerSecond: () => 1 },
+					{ checkIfAffordable: jest.fn(() => true), calculateCookiesPerSecond: () => 1 }
+				]
+			};
+			const dbServiceMock = {
+				clear: jest.fn()
+			};
+
+			const app = new GameService({
+				observable: true,
+				state: stateMock,
+				dbService: dbServiceMock
+			});
+
+			app.resetGame();
+
+			expect(app.state.cookiesQuantity).not.toBe(stateMock.cookiesQuantity);
+			expect(dbServiceMock.clear).toHaveBeenCalled();
 		});
 	});
 
 	describe('calculateCookiesPerSecond', () => {
 		it('should add together CpS from all buildings', () => {
 			jest.spyOn(GameService.prototype, 'startGame').mockImplementation(() => true);
+			jest.spyOn(GameService.prototype, 'autoSave').mockImplementation(() => true);
 			const cpsMock = jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond');
 			
 			const stateMock = {
@@ -40,11 +97,13 @@ describe('GameService', () => {
 	});
 
 	describe('startGame', () => {
-		// beforeEach(() => jest.clearAllTimers());
+		afterEach(() => jest.clearAllTimers());
+		
 		it('should start a game loop', () => {
 			jest.spyOn(GameService.prototype, 'update').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'render').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond').mockImplementation(() => true);
+			jest.spyOn(GameService.prototype, 'autoSave').mockImplementation(() => true);
 			const rafMock = jest.spyOn(window, 'requestAnimationFrame');
 
 			new GameService({ observable: true, state: true });
@@ -56,6 +115,7 @@ describe('GameService', () => {
 			const updateMock = jest.spyOn(GameService.prototype, 'update').mockImplementation(() => true);
 			const renderMock = jest.spyOn(GameService.prototype, 'render').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond').mockImplementation(() => true);
+			jest.spyOn(GameService.prototype, 'autoSave').mockImplementation(() => true);
 			jest.useFakeTimers();
 
 			new GameService({ observable: true, state: true });
@@ -73,6 +133,7 @@ describe('GameService', () => {
 		it('adds cookies per second when seconds are passed in', () => {
 			jest.spyOn(GameService.prototype, 'startGame').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'render').mockImplementation(() => true);
+			jest.spyOn(GameService.prototype, 'autoSave').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond').mockImplementation(() => true);
 	
 			const stateMock = {
@@ -93,6 +154,7 @@ describe('GameService', () => {
 
 		it('shouldn\' add cookies per second when seconds are not passed in', () => {
 			jest.spyOn(GameService.prototype, 'startGame').mockImplementation(() => true);
+			jest.spyOn(GameService.prototype, 'autoSave').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'render').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond').mockImplementation(() => true);
 
@@ -114,6 +176,7 @@ describe('GameService', () => {
 
 		it('should check if buildings are affordable', () => {
 			jest.spyOn(GameService.prototype, 'startGame').mockImplementation(() => true);
+			jest.spyOn(GameService.prototype, 'autoSave').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'render').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond').mockImplementation(() => true);
 
@@ -139,6 +202,7 @@ describe('GameService', () => {
 	describe('render', () => {
 		it('should call emitEvent on observable', () => {
 			jest.spyOn(GameService.prototype, 'startGame').mockImplementation(() => true);
+			jest.spyOn(GameService.prototype, 'autoSave').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond').mockImplementation(() => true);
 			const emitEventMock = jest.spyOn(ObservableService.prototype, 'emitEvent');
 
@@ -153,9 +217,9 @@ describe('GameService', () => {
 	describe('buyBuilding', () => {
 		it('calls buy method on right building and lowers cookies quantity if building is affordable ', () => {
 			jest.spyOn(GameService.prototype, 'startGame').mockImplementation(() => true);
+			jest.spyOn(GameService.prototype, 'autoSave').mockImplementation(() => true);
 			const cprMock = jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond').mockImplementation(() => true);
 			const reqRefMock = jest.spyOn(GameService.prototype, 'requestRefresh').mockImplementation(() => true);
-
 
 			const stateMock = {
 				cookiesQuantity: 15.1,
@@ -176,6 +240,7 @@ describe('GameService', () => {
 
 		it('shouldn\'t lower cookies quantity if building is not affordable', () => {
 			jest.spyOn(GameService.prototype, 'startGame').mockImplementation(() => true);
+			jest.spyOn(GameService.prototype, 'autoSave').mockImplementation(() => true);
 			const cprMock = jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond').mockImplementation(() => true);
 			const reqRefMock = jest.spyOn(GameService.prototype, 'requestRefresh').mockImplementation(() => true);
 
@@ -200,6 +265,7 @@ describe('GameService', () => {
 	describe('click', () => {
 		it('should add cookies per click', () => {
 			jest.spyOn(GameService.prototype, 'startGame').mockImplementation(() => true);
+			jest.spyOn(GameService.prototype, 'autoSave').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond').mockImplementation(() => true);
 			const reqRefMock = jest.spyOn(GameService.prototype, 'requestRefresh').mockImplementation(() => true);
 
@@ -219,6 +285,7 @@ describe('GameService', () => {
 		it('should call update and render', () => {
 			const updateMock = jest.spyOn(GameService.prototype, 'update').mockImplementation(() => true);
 			const renderMock = jest.spyOn(GameService.prototype, 'render').mockImplementation(() => true);
+			jest.spyOn(GameService.prototype, 'autoSave').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'startGame').mockImplementation(() => true);
 			jest.spyOn(GameService.prototype, 'calculateCookiesPerSecond').mockImplementation(() => true);
 
