@@ -56,4 +56,4 @@ class Factory extends Structure {
 	}
 }
 
-export default [ Cursor, Grandma, Farm, Mine, Factory ];
+export default { Cursor, Grandma, Farm, Mine, Factory };

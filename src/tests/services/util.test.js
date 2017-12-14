@@ -14,18 +14,17 @@ describe('util', () => {
 		});
 
 		it('should construct buildings', () => {
-			const Buildings = [
-				class BigBen extends Structure {
-					constructor(owned) {
-						super({
-							owned,
-							baseCost: 12000,
-							name: 'BigBen',
-							incrQuantity: 47
-						});
-					}
+			class BigBen extends Structure {
+				constructor(owned) {
+					super({
+						owned,
+						baseCost: 12000,
+						name: 'BigBen',
+						incrQuantity: 47
+					});
 				}
-			];
+			}
+			const Buildings = { BigBen };
 
 			const state = getInitialState(Buildings);
 

@@ -5,7 +5,7 @@ import { app } from '../../services';
 
 const Store = ({ sub }) => (
 	<ul class={style.store}>
-		{ sub && sub.buildings.map(({ name, owned, affordable, cookiesPerSecond, price }) => { 
+		{ sub && sub.buildings.map(({ name, owned, affordable, cookiesPerSecond, price }) => {
 			const buy = () => app.buyBuilding(name, 1);
 			return (
 				<li
