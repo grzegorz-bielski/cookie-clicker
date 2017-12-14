@@ -3,6 +3,8 @@ Click on a cookie to get a cookie! Absolutely gluten-free!
 
 A clone of popular [cookie clicker game](http://orteil.dashnet.org/cookieclicker/).
 
+## __[Demo](https://pesiok.github.io/cookie-clicker/)__
+
 ## Features
 TODO
 
