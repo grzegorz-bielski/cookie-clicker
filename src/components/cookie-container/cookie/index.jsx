@@ -1,8 +1,8 @@
 import { h } from 'preact';
 import style from './style';
-import cookie from '../../assets/images/cookie.svg';
+import cookie from '../../../assets/images/cookie.svg';
 
-import { app } from '../../services';
+import { app } from '../../../services';
 
 const clickHandler = () => app.click();
 

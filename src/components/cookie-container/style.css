@@ -1,0 +1,27 @@
+.cookieContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.cookieWrapper {
+	display: flex;
+	align-items: center;
+	flex: 1;
+
+	min-height: 25rem;
+}
+
+@media (min-width: 576px) {
+	.cookieContainer {
+		height: auto;
+	
+	}
+}
+
+@media (min-width: 1050px) {
+	.cookieContainer {
+		margin-right: 10rem;
+	
+	}
+}

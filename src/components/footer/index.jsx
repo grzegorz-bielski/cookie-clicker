@@ -1,5 +1,6 @@
 import { h } from 'preact';
 
+import style from './style';
 import { app } from '../../services';
 
 class Footer {
@@ -7,7 +8,7 @@ class Footer {
 
 	render() {
 		return (
-			<footer>
+			<footer class={style.pageFooter}>
 			Icons made by
 				<a
 					href="http://www.freepik.com"

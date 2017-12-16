@@ -1,16 +1,18 @@
 import { h } from 'preact';
-// import style from './style';
+import style from './style';
 
 import { SubscribeToState } from '../common/subscribe-to';
-import Stats from '../stats';
-import Cookie from '../cookie';
+import Stats from './stats';
+import Cookie from './cookie';
 
 const CookieContainer = () => (
-	<div>
+	<div class={style.cookieContainer}>
 		<SubscribeToState>
 			<Stats />
 		</SubscribeToState>
-		<Cookie />
+		<div class={style.cookieWrapper}>
+			<Cookie />
+		</div>
 	</div>
 );
 

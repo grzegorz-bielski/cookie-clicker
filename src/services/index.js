@@ -1,4 +1,6 @@
+import 'indexeddb-getall-shim';
 import idb from 'idb';
+
 import ObservableService from './observable/observable';
 import { getInitialState, transformDbState } from './game/util';
 import GameService from './game/game';

@@ -7,7 +7,7 @@ import Footer from './footer';
 const App = () => (
 	<div id="app">
 		<Main />
-		<Footer />
+		{/* <Footer /> */}
 	</div>
 );
 
