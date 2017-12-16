@@ -1,29 +1,14 @@
 import { h } from 'preact';
 
-import { SubscribeToState } from './common/subscribe-to';
-// import { appState } from '../services';
-
 // components
-import Header from './header';
-import Cookie from './cookie';
-import Store from './store';
+import Main from './main';
+import Footer from './footer';
 
-export default class App {
-	componentDidMount() {
-		// appState.requestRefresh();
-	}
+const App = () => (
+	<div id="app">
+		<Main />
+		<Footer />
+	</div>
+);
 
-	render() {
-		return (
-			<div id="app">
-				<SubscribeToState>
-					<Header />
-				</SubscribeToState>
-				<Cookie />
-				<SubscribeToState>
-					<Store />
-				</SubscribeToState>
-			</div>
-		);
-	}
-}
+export default App;

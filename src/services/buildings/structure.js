@@ -1,7 +1,9 @@
 export default class Structure {
-	constructor({ baseCost, owned = 0, name, refreshRate, incrQuantity }) {
+	constructor({ desc, picture, baseCost, owned = 0, name, refreshRate, incrQuantity }) {
 		this.baseCost = baseCost;
 		this.owned = owned;
+		this.picture = picture;
+		this.desc = desc;
 		this.name = name;
 		this.refreshRate = refreshRate ? refreshRate : 1;
 		this.incrQuantity = incrQuantity;
