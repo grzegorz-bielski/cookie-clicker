@@ -4,12 +4,14 @@ import cookie from '../../../assets/images/cookie.svg';
 
 import { app } from '../../../services';
 
-const clickHandler = () => app.click();
-
-const Cookie = ({ sub }) => (
-	<button class={style.cookie} onClick={clickHandler}>
-		<img src={cookie} alt="cookie" />
-	</button>
-);
-
-export default Cookie;
+export default class Cookie {
+	clickHandler = () => app.click();
+	
+	render() {
+		return (
+			<button class={style.cookie} onClick={this.clickHandler}>
+				<img src={cookie} alt="cookie" />
+			</button>
+		);
+	}
+}

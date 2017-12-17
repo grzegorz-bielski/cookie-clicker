@@ -12,6 +12,8 @@ export default class StoreItem {
 				class={`${style.storeListItem} ${props.affordable ? style.storeListItemActive : style.storeListItemBlocked}`}
 				onClick={this.buy}
 				key={props.name}
+				role="button"
+				tabIndex="0"
 			>
 				<span class={style.foldedCorner} aria-hidden="true" />
 				<h3>{props.name}</h3>

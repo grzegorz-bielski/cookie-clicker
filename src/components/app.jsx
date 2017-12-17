@@ -1,13 +1,13 @@
 import { h } from 'preact';
 
 // components
-import Main from './main';
-import Footer from './footer';
+import CookieContainer from './cookie-container';
+import StoreContainer from './store-container';
 
 const App = () => (
 	<div id="app">
-		<Main />
-		{/* <Footer /> */}
+		<CookieContainer />
+		<StoreContainer />
 	</div>
 );
 

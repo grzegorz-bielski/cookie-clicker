@@ -60,6 +60,37 @@
 	word-break: break-all;
 }
 
+.github {
+	position: absolute;
+	top: 0.75rem;
+	left: 0.75rem;
+
+	transform: skew(1deg);
+	transition: transform 0.12s ease-in;
+}
+
+.trash {
+	cursor: pointer;
+	position: absolute;
+	bottom: 0.5rem;
+	left: 0.4rem;
+
+	background: none;
+	border: none;
+
+	width: 3rem;
+
+	transform: skew(1deg);
+	transition: transform 0.1s ease-in;
+}
+
+.trash:hover,
+.trash:focus,
+.github:hover,
+.github:focus {
+	transform: skew(4deg);
+}
+
 @media (min-width: 576px) {
 	.quantity {
 		width: 20rem;
