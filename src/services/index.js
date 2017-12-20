@@ -7,30 +7,23 @@ import GameService from './game/game';
 import DbService from './database/db';
 
 export let app;
-export let observable;
+export let observable = new ObservableService();
 
-// run only in browser
-if (typeof window !== 'undefined') {
-	// inject dependencies and initialize the app
-	
-	observable = new ObservableService();
+// inject dependencies and initialize the app
 
-	const dbService = new DbService({
-		driver: idb,
-		name: 'cookie-clicker-db',
-		stores: [{ store: 'state', key: 'name' }]
+const dbService = new DbService({
+	driver: idb,
+	name: 'cookie-clicker-db',
+	stores: [{ store: 'state', key: 'name' }]
+});
+
+dbService.readAll('state').then(state => {
+	app = new GameService({
+		observable,
+		dbService,
+		saveInterval: 2,
+		state: (!state || state.length <= 0)
+			? getInitialState()
+			: transformDbState(state[0])
 	});
-
-	dbService.readAll('state').then(state => {
-		app = new GameService({
-			observable,
-			dbService,
-			saveInterval: 2,
-			state: (!state || state.length <= 0)
-				? getInitialState()
-				: transformDbState(state[0])
-		});
-	});
-}
-
-
+});
