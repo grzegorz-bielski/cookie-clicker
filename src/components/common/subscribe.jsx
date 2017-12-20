@@ -20,7 +20,6 @@ class Subscribe extends Component {
 		if (event) {
 			this.observable.addObserver(event, this, this.onAppStateChange);
 		}
-		
 	}
 
 	componentWillUnmount() {
