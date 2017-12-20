@@ -1,10 +1,13 @@
 import { h } from 'preact';
 
-import style from './style';
 import { app } from '../../../services';
+import style from './style';
 
 export default class StoreItem {
-	buy = () => app.buyBuilding(this.props.name, 1);
+	buy = () => {
+		const { app: propApp, name } = this.props;
+		propApp ? propApp.buyBuilding(name, 1) : app.buyBuilding(name, 1);
+	}
 
 	render(props) {
 		return (

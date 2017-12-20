@@ -1,6 +1,6 @@
 {
-  "name": "cookie-clicker",
-  "short_name": "cookie-clicker",
+  "name": "Cookie Clicker",
+  "short_name": "clicker",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fff",

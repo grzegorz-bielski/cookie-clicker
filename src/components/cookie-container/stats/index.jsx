@@ -7,7 +7,7 @@ import trashIcon from '../../../assets/images/trash.svg';
 import { app } from '../../../services';
 
 export default class Stats {
-	resetHandler = () => app.resetGame();
+	resetHandler = () => this.props.app ? this.props.app.resetGame() : app.resetGame();
 
 	render({ sub }) {
 		return (

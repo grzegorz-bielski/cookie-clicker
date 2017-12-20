@@ -1,11 +1,12 @@
 import { h } from 'preact';
+
 import style from './style';
 import cookie from '../../../assets/images/cookie.svg';
 
 import { app } from '../../../services';
 
 export default class Cookie {
-	clickHandler = () => app.click();
+	clickHandler = () => this.props.app ? this.props.app.click() : app.click();
 	
 	render() {
 		return (
