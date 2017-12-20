@@ -1,5 +1,7 @@
 .storeListItem {
 	position: relative;
+	z-index: 0;
+	
 	margin: 0.5rem;
 	padding: 1rem;
 
@@ -8,7 +10,7 @@
 
 	box-shadow: 0 1px 0px rgba(0,0,0,0.3);
 
-	z-index: 0;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .storeListItem:hover .foldedCorner,

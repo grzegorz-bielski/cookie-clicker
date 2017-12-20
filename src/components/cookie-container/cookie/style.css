@@ -14,11 +14,14 @@
 
 	transition: transform 0.1s filter 0.1s ease-in;
 	filter: drop-shadow( 3px 3px 7px #000 );
+
+	-webkit-tap-highlight-color: transparent;
 }
 
 .cookie:hover,
 .cookie:focus {
-	transform: translate(-2px, -2px)
+	transform: translate(-2px, -2px);
+	filter: drop-shadow( 4px 4px 8px #000 );
 }
 
 .cookie:active {

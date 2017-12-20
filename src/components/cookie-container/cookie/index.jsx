@@ -10,7 +10,7 @@ export default class Cookie {
 	
 	render() {
 		return (
-			<button class={style.cookie} onClick={this.clickHandler}>
+			<button class={style.cookie} onClick={this.clickHandler} aria-label="get cookie">
 				<img src={cookie} alt="cookie" />
 			</button>
 		);
