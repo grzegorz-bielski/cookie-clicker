@@ -1,13 +1,18 @@
 import Structure from './structure';
 
+// buildings descriptions and stats acquired from cookie clicker wiki:
+// http://cookieclicker.wikia.com/wiki/Buildings
+
 class Cursor extends Structure {
 	constructor(owned) {
 		super({
 			owned,
 			baseCost: 15,
-			name: 'Cursor',
 			refreshRate: 0.1,
-			incrQuantity: 1
+			incrQuantity: 1,
+			name: 'Cursor',
+			picture: 'cursor.svg',
+			desc: 'Autoclicks once every 10 seconds.'
 		});
 	}
 }
@@ -17,8 +22,10 @@ class Grandma extends Structure {
 		super({
 			owned,
 			baseCost: 100,
+			incrQuantity: 1,
 			name: 'Grandma',
-			incrQuantity: 1
+			picture: 'grandma.svg',
+			desc: 'A nice grandma to bake more cookies.'
 		});
 	}
 }
@@ -28,8 +35,10 @@ class Farm extends Structure {
 		super({
 			owned,
 			baseCost: 1100,
+			incrQuantity: 8,
 			name: 'Farm',
-			incrQuantity: 8
+			picture: 'farm.svg',
+			desc: 'Grows cookie plants from cookie seeds.'
 		});
 	}
 }
@@ -39,8 +48,10 @@ class Mine extends Structure {
 		super({
 			owned,
 			baseCost: 12000,
+			incrQuantity: 47,
 			name: 'Mine',
-			incrQuantity: 47
+			picture: 'mine.svg',
+			desc: 'Mines out cookie dough and chocolate chips.'
 		});
 	}
 }
@@ -50,8 +61,10 @@ class Factory extends Structure {
 		super({
 			owned,
 			baseCost: 130000,
+			incrQuantity: 260,
 			name: 'Factory',
-			incrQuantity: 260
+			picture: 'factory.svg',
+			desc: 'Produces large quantities of cookies.'
 		});
 	}
 }

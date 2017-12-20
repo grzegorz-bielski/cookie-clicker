@@ -1,0 +1,98 @@
+.stats {
+	position: relative;
+	margin: 1rem;
+	margin-top: 1.6rem;
+
+	padding: 0.2rem;
+	padding-left: 2.2rem;
+
+	font-family: 'Kalam', cursive;
+}
+
+.stats h1 {
+	margin: 0;
+
+	font-size: 2rem;
+	font-weight: 700;
+	text-align: center;
+}
+
+.stats {
+	
+	/* paper lines */
+	/* original idea by Sarah Backhouse */
+	background-color: #ffffff; 
+	background-image: 
+	linear-gradient(90deg, transparent 59px, #e26d52 59px, #e26d52 61px, transparent 61px),
+	linear-gradient(#eee .1em, transparent .1em);
+	background-size: 100% 1.2em;
+
+	/* shadows */
+	/* by Kunuk Nykjæ */
+  box-shadow:
+    /* The top layer shadow */
+    0 -1px 1px rgba(0,0,0,0.15),
+    /* The second layer */
+    0 -10px 0 -5px #eee,
+    /* The second layer shadow */
+    0 -10px 1px -4px rgba(0,0,0,0.15),
+     /* The third layer */
+    0 -20px 0 -10px #eee,
+    /* The third layer shadow */
+		0 -20px 1px -9px rgba(0,0,0,0.15),
+		0 0.8rem 0.8rem rgba(0,0,0,0.15);
+}
+
+.quantity, .cps {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.quantity {
+	font-size: 2.5rem;
+	width: 100%;
+	word-break: break-all;
+}
+
+.cps {
+	font-size: 1.2rem;
+	word-break: break-all;
+}
+
+.github {
+	position: absolute;
+	top: 0.75rem;
+	left: 0.75rem;
+
+	transform: skew(1deg);
+	transition: transform 0.12s ease-in;
+}
+
+.trash {
+	cursor: pointer;
+	position: absolute;
+	bottom: 0.5rem;
+	left: 0.4rem;
+
+	background: none;
+	border: none;
+
+	width: 3rem;
+
+	transform: skew(1deg);
+	transition: transform 0.1s ease-in;
+}
+
+.trash:hover,
+.trash:focus,
+.github:hover,
+.github:focus {
+	transform: skew(4deg);
+}
+
+@media (min-width: 576px) {
+	.quantity {
+		width: 20rem;
+	}
+}

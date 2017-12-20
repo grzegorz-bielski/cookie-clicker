@@ -1,0 +1,92 @@
+.storeListItem {
+	position: relative;
+	margin: 0.5rem;
+	padding: 1rem;
+
+	list-style-type: none;
+	outline: none;
+
+	box-shadow: 0 1px 0px rgba(0,0,0,0.3);
+
+	z-index: 0;
+}
+
+.storeListItem:hover .foldedCorner,
+.storeListItem:focus .foldedCorner  {
+	border-width: 0 5rem 5rem 0;
+}
+
+.storeListItem h3 {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+
+	font-family: 'Kalam', cursive;
+	font-size: 1.8rem;
+}
+
+.storeListItemBlocked {
+	background: linear-gradient(to bottom, #250b0b 0%, #1a0505 100%);
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.storeListItemActive {
+	cursor: pointer;
+	pointer-events: initial;
+	opacity: 1;
+	background-color: #ffffff;
+	transition: background-color 0.3s ease-in;
+}
+
+.storeListItemInfo {
+	font-family: 'Kalam', cursive;
+	height: 4rem;
+}
+
+.storeListItemInfo span {
+	display: block;
+
+	line-height: 1.35rem;
+	font-size: 1.1rem;
+}
+
+.storeListItemInfo b {
+	font-size: 1rem;
+}
+
+.storeListItemDesc {
+	font-family: 'Kalam', cursive;
+	font-size: 1.1rem;
+	margin-top: 2.2rem;
+}
+
+.foldedCorner {
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	width: 0;
+	height: 0;
+
+	border-width: 0;
+	border-style: solid;
+	background: hsla(260,5%,60%,0.2);
+	border-radius: 0 0 0 10px;
+	border-color: #7f5037 #7f5037 transparent transparent;
+
+	transition: border-width 0.2s ease-out;
+}
+
+.icon {
+	float: left;
+
+	height: 100%;
+	margin-top: 0.75rem;
+	margin-right: 1rem;
+}
+
+@media (min-width: 1050px) {
+	.storeListItem {
+		margin: 0.75rem;
+	}
+}

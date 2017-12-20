@@ -1,16 +1,15 @@
 {
-  "name": "cookie-clicker",
-  "short_name": "cookie-clicker",
+  "name": "Cookie Clicker",
+  "short_name": "clicker",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#fff",
-  "theme_color": "#673ab8",
+  "theme_color": "#7f5037",
   "icons": [
     {
-      "src": "/assets/icons/android-chrome-192x192.png",
+      "src": "/assets/icons/android-chrome-128x128.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "128x128"
     },
     {
       "src": "/assets/icons/android-chrome-512x512.png",
